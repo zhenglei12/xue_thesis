@@ -22,6 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Admin'], function () {
     Route::post("auth/login", "UserControllers@login");
     Route::post("order/from", "OrderFromControllers@add");
+    Route::post("order/from/detail", "OrderFromControllers@detail");
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth:sanctum'], function () {
@@ -37,7 +38,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth:sanctum'], function 
 
     Route::post("public/department/list", "DepartmentController@getThreeCalssifyAll");
 
-    Route::post("order/from/detail", "OrderFromControllers@detail");
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => ['auth:sanctum', 'ly.permission']], function () {
