@@ -515,7 +515,7 @@ class OrderControllers extends Controller
 //            'twice_time' => $data['twice_time'] ?? '',
 //            'receipt_account_type' => $data['receipt_account_type'] ?? 1,
             "twice_img" => $data['twice_img'] ?? '',
-            'wr_where' => $data['wr_where']
+            'wr_where' => $data['wr_where'] ?? ''
         ];
         return $initData;
     }
