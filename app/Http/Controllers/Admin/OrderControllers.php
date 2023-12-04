@@ -121,60 +121,64 @@ class OrderControllers extends Controller
         $pageSize = $this->request->input('pageSize') ?? 10;
         $order = new Order();
         $order = $this->getInitSelect($order);
-        if ($this->request->input('subject')) {
-            $order = $order->where('subject', 'like', "%" . $this->request->input('subject') . "%");
-        }
-        if ($this->request->input('word_number')) {
-            $order = $order->where('word_number', $this->request->input('word_number'));
-        }
-        if ($this->request->input('task_type')) {
-            $order = $order->where('task_type', '=', $this->request->input('task_type'));
-        }
-        if ($this->request->input('id')) {
-            $order = $order->where('id', '=', $this->request->input('id'));
-        }
-        if ($this->request->input('classify_id')) {
-            $order = $order->where('classify_id', 'like', "%" . $this->request->input('classify_id') . "%");
-        }
-        if ($this->request->input('name')) {
-            $order = $order->where('name', 'like', "%" . $this->request->input('name') . "%");
-        }
-        if ($this->request->input('staff_name')) {
-            $order = $order->where('staff_name', 'like', "%" . $this->request->input('staff_name') . "%");
-        }
-        if ($this->request->input('edit_name')) {
-            $order = $order->where('edit_name', 'like', "%" . $this->request->input('edit_name') . "%");
-        }
-        if ($this->request->input('submission_end_time')) {
-            $order = $order->whereDate('submission_time', '<=', $this->request->input('submission_end_time'))->whereDate('submission_time', '>=', $this->request->input('submission_time'));
-        }
-        if ($this->request->input('status')) {
-            $order = $order->where('status', '=', $this->request->input('status'));
-        }
-
-        if ($this->request->input('finance_check')) {
-            $order = $order->where('finance_check', '=', $this->request->input('finance_check'));
-        }
-        $dataaa = $this->request->input();
-        if (isset($dataaa['finance_check'])) {
-            if ($dataaa['finance_check'] == 0)
-                $order = $order->where('finance_check', 0);
-        }
-
-        if ($this->request->input('receipt_account_type')) {
-            $order = $order->where('receipt_account_type', '=', $this->request->input('receipt_account_type'));
-        }
-
-//        if ($this->request->input('created_at')) {
-//            $order = $order->where('created_at', 'like', "%" . $this->request->input('created_at') . "%");
+//        if ($this->request->input('subject')) {
+//            $order = $order->where('subject', 'like', "%" . $this->request->input('subject') . "%");
+//        }
+//        if ($this->request->input('word_number')) {
+//            $order = $order->where('word_number', $this->request->input('word_number'));
+//        }
+//        if ($this->request->input('task_type')) {
+//            $order = $order->where('task_type', '=', $this->request->input('task_type'));
 //        }
         if ($this->request->input('end_time')) {
             $order = $order->whereDate('created_at', '<=', $this->request->input('end_time'))->whereDate('created_at', '>=', $this->request->input('created_at'));
         }
-        $order = $order->orderBy('created_at', 'desc')->with('classify')->paginate($pageSize, ['*'], "page", $page);
+        if ($this->request->input('id')) {
+            $order = $order->where('id', '=', $this->request->input('id'));
+        }
+        if ($this->request->input('status')) {
+            $order = $order->where('status', '=', $this->request->input('status'));
+        }
+        if ($this->request->input('staff_name')) {
+            $order = $order->where('staff_name', 'like', "%" . $this->request->input('staff_name') . "%");
+        }
+        if ($this->request->input('name')) {
+            $order = $order->where('name', 'like', "%" . $this->request->input('name') . "%");
+        }
+//        if ($this->request->input('classify_id')) {
+//            $order = $order->where('classify_id', 'like', "%" . $this->request->input('classify_id') . "%");
+//        }
+
+
+//        if ($this->request->input('edit_name')) {
+//            $order = $order->where('edit_name', 'like', "%" . $this->request->input('edit_name') . "%");
+//        }
+//        if ($this->request->input('submission_end_time')) {
+//            $order = $order->whereDate('submission_time', '<=', $this->request->input('submission_end_time'))->whereDate('submission_time', '>=', $this->request->input('submission_time'));
+//        }
+
+//
+//        if ($this->request->input('finance_check')) {
+//            $order = $order->where('finance_check', '=', $this->request->input('finance_check'));
+//        }
+//        $dataaa = $this->request->input();
+//        if (isset($dataaa['finance_check'])) {
+//            if ($dataaa['finance_check'] == 0)
+//                $order = $order->where('finance_check', 0);
+//        }
+//
+//        if ($this->request->input('receipt_account_type')) {
+//            $order = $order->where('receipt_account_type', '=', $this->request->input('receipt_account_type'));
+//        }
+
+//        if ($this->request->input('created_at')) {
+//            $order = $order->where('created_at', 'like', "%" . $this->request->input('created_at') . "%");
+//        }
+
+        $order = $order->orderBy('created_at', 'desc')->paginate($pageSize, ['*'], "page", $page);
         if ($order->items()) {
             foreach ($order->items() as $values) {
-                $values['received_all'] = $values['received_amount'] + $values['twice_received_amount'] + $values['end_received_amount'];
+               // $values['received_all'] = $values['received_amount'] + $values['twice_received_amount'] + $values['end_received_amount'];
             }
         }
         return $order;
