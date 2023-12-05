@@ -500,7 +500,7 @@ class OrderControllers extends Controller
             'amount' => $data['amount'] ?? 0,
             'received_amount' => $data['received_amount'] ?? 0,
             'pay_img' => $data['pay_img'] ?? '',
-            'pay_type' => $data['pay_type'] ?? '',
+//            'pay_type' => $data['pay_type'] ?? '',
 //            'detail_re' => $data['detail_re'] ?? '',
 //            'receipt_time' => $data['receipt_time'] ?? '',
             'receipt_account' => $data['receipt_account'] ?? '',
