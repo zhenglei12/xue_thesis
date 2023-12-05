@@ -262,12 +262,11 @@ class OrderControllers extends Controller
     {
         $this->request->validate([
             'id' => ['required', 'exists:' . (new Order())->getTable() . ',id'],
-            'subject' => ['required'],
-            'word_number' => 'required',
-            'task_type' => 'required',
-            'task_ask' => 'required',
-            'name' => 'required',
-            'submission_time' => 'required',
+            'amount' => 'required',
+//            'task_type' => 'required',
+//            'task_ask' => 'required',
+//            'name' => 'required',
+//            'submission_time' => 'required',
         ]);
         $data = self::initData($this->request->input());
         if (isset($data['classify_id'])) {
