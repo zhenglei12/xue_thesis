@@ -263,7 +263,7 @@ class OrderControllers extends Controller
         $this->request->validate([
             'id' => ['required', 'exists:' . (new Order())->getTable() . ',id'],
             'amount' => 'required',
-//            'task_type' => 'required',
+            'phone' => 'required',
 //            'task_ask' => 'required',
 //            'name' => 'required',
 //            'submission_time' => 'required',
