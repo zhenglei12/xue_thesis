@@ -178,7 +178,7 @@ class OrderControllers extends Controller
         $order = $order->orderBy('created_at', 'desc')->paginate($pageSize, ['*'], "page", $page);
         if ($order->items()) {
             foreach ($order->items() as $values) {
-               // $values['received_all'] = $values['received_amount'] + $values['twice_received_amount'] + $values['end_received_amount'];
+                // $values['received_all'] = $values['received_amount'] + $values['twice_received_amount'] + $values['end_received_amount'];
             }
         }
         return $order;
@@ -222,12 +222,8 @@ class OrderControllers extends Controller
     public function add()
     {
         $this->request->validate([
-            'subject' => ['required'],
-            'word_number' => 'required',
-            'task_type' => 'required',
-            'task_ask' => 'required',
-            'name' => 'required',
-            'submission_time' => 'required',
+            'amount' => 'required',
+            'phone' => 'required',
         ]);
         $data = $this->request->input();
         $data['staff_name'] = Auth::user()->name;
@@ -345,7 +341,8 @@ class OrderControllers extends Controller
         if ($user->roles->pluck('alias')[0] == 'edit') {
             $order = $order->where('edit_name', $user['name']);
         }
-        $data['count_num'] = $order->sum('word_number');
+//        $data['count_num'] = $order->sum('word_number');
+        $data['count_num'] = 0;
         return $data;
     }
 
@@ -495,7 +492,7 @@ class OrderControllers extends Controller
 //            'task_ask' => $data['task_ask'],
             'name' => $data['name'],
 //            'submission_time' => $data['submission_time'],
-            //          'phone' => $data['phone'] ?? '',
+            'phone' => $data['phone'] ?? '',
 //            'want_name' => $data['want_name'] ?? '',
             'amount' => $data['amount'] ?? 0,
             'received_amount' => $data['received_amount'] ?? 0,
