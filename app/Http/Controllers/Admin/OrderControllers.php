@@ -298,7 +298,7 @@ class OrderControllers extends Controller
             'after_banlace' => ['required'],
         ]);
         $data = $this->request->input();
-        $data['after_time'] = date("Y-m-d H:i:s");
+//        $data['after_time'] = date("Y-m-d H:i:s");
         return Order::where('id', $this->request->input('id'))->Update($data);
     }
 
@@ -386,14 +386,14 @@ class OrderControllers extends Controller
     public function statusReplace($name, $historyStarus, $status)
     {
         $data = [
-            '-1' => '等待安排',
-            '1' => '写作中',
-            '2' => '打回修改',
+            '-1' => '待分配',
+            '1' => '跟进中',
+//            '2' => '打回修改',
             '3' => '订单完成',
-            '4' => '提交客户',
-            '5' => "已经交稿",
+//            '4' => '提交客户',
+//            '5' => "已经交稿",
             '6' => "售后中",
-            '7' => "售后完成"
+//            '7' => "售后完成"
 
         ];
         return $name . ",将订单状态" . $data[$historyStarus] . "修改为" . $data[$status];

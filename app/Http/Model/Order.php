@@ -23,6 +23,7 @@ class Order extends Model
         'finance_check',
         'remark',
         'staff_name',
+        "after_name",
         'edit_name',
         'status',
         'after_banlace',
