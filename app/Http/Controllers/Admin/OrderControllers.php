@@ -490,27 +490,27 @@ class OrderControllers extends Controller
     public function initData($data)
     {
         $initData = [
-            'subject' => $data['subject'],
-            'word_number' => $data['word_number'],
-            'task_type' => $data['task_type'],
-            'task_ask' => $data['task_ask'],
+//            'subject' => $data['subject'],
+//            'word_number' => $data['word_number'],
+//            'task_type' => $data['task_type'],
+//            'task_ask' => $data['task_ask'],
             'name' => $data['name'],
-            'submission_time' => $data['submission_time'],
+//            'submission_time' => $data['submission_time'],
             //          'phone' => $data['phone'] ?? '',
-            'want_name' => $data['want_name'] ?? '',
+//            'want_name' => $data['want_name'] ?? '',
             'amount' => $data['amount'] ?? 0,
             'received_amount' => $data['received_amount'] ?? 0,
             'pay_img' => $data['pay_img'] ?? '',
             'pay_type' => $data['pay_type'] ?? '',
-            'detail_re' => $data['detail_re'] ?? '',
-            'receipt_time' => $data['receipt_time'] ?? '',
+//            'detail_re' => $data['detail_re'] ?? '',
+//            'receipt_time' => $data['receipt_time'] ?? '',
             'receipt_account' => $data['receipt_account'] ?? '',
             'remark' => $data['remark'] ?? '',
             'twice_received_amount' => $data['twice_received_amount'] ?? 0,
             'end_received_amount' => $data['end_received_amount'] ?? 0,
-            'end_time' => $data['end_time'] ?? '',
-            'twice_time' => $data['twice_time'] ?? '',
-            'receipt_account_type' => $data['receipt_account_type'] ?? 1,
+//            'end_time' => $data['end_time'] ?? '',
+//            'twice_time' => $data['twice_time'] ?? '',
+//            'receipt_account_type' => $data['receipt_account_type'] ?? 1,
             "twice_img" => $data['twice_img'] ?? ''
 //            'wr_where' => $data['wr_where']
         ];
