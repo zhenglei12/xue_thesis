@@ -269,23 +269,22 @@ class OrderControllers extends Controller
 //            'submission_time' => 'required',
         ]);
         $data = self::initData($this->request->input());
-        if (isset($data['classify_id'])) {
-            $data['classify_local_id'] = (new ManuscriptBankControllers())->getClassifyId($data['classify_id']);
-            $data['classify_id'] = implode(",", $data['classify_id']);
-        } else {
-            $data['classify_local_id'] = null;
-            $data['classify_id'] = null;
-        }
+//        if (isset($data['classify_id'])) {
+//            $data['classify_local_id'] = (new ManuscriptBankControllers())->getClassifyId($data['classify_id']);
+//            $data['classify_id'] = implode(",", $data['classify_id']);
+//        } else {
+//            $data['classify_local_id'] = null;
+//            $data['classify_id'] = null;
+//        }
         $img = $this->request->input();
         if (isset($img['pay_img'])) {
             $data['finance_check'] = 0;
         }
-
-        if (isset($img['twice_img'])) {
-            $data['finance_check'] = 2;
-        }
         if (isset($img['receipt_account'])) {
             $data['finance_check'] = 1;
+        }
+        if (isset($img['twice_img'])) {
+            $data['finance_check'] = 2;
         }
         return Order::where('id', $this->request->input('id'))->Update($data);
     }
