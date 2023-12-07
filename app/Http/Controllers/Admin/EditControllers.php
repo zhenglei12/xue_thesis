@@ -76,10 +76,10 @@ class EditControllers
 
         return $order->select(
             "edit_name",
-            DB::raw("count(case when edit_submit_time like '%$date%' then edit_submit_time else null end) as commit"), //提交数量
-            DB::raw("sum(case when edit_submit_time like '%$date%' then word_number else 0 end) as commit_word_number"), //提交字数
-            DB::raw("count(case when edit_submit_time like '%$date%' then edit_submit_time else null end) as alter_number"), //修改数量
-            DB::raw("sum(case when edit_submit_time like '%$date%' then alter_word else 0 end) as alter_word_number"), //修改字数
+//            DB::raw("count(case when edit_submit_time like '%$date%' then edit_submit_time else null end) as commit"), //提交数量
+//            DB::raw("sum(case when edit_submit_time like '%$date%' then word_number else 0 end) as commit_word_number"), //提交字数
+//            DB::raw("count(case when edit_submit_time like '%$date%' then edit_submit_time else null end) as alter_number"), //修改数量
+//            DB::raw("sum(case when edit_submit_time like '%$date%' then alter_word else 0 end) as alter_word_number"), //修改字数
             DB::raw("count(case when created_at like '%$date%' then created_at else null end ) as num"), //数量
             DB::raw("	sum(case when created_at like '%$date%' then amount else 0 end) as amount"),//金额
             DB::raw("sum(case when created_at like '%$date%' then word_number else 0 end) as word_number") //字数

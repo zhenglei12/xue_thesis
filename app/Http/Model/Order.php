@@ -30,6 +30,8 @@ class Order extends Model
         'after_banlace',
         'wr_where',
         'want_name',
+        "reason",
+        "manuscript"
     ];
 
     protected $casts = [
