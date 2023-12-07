@@ -12,6 +12,7 @@ class Order extends Model
 
     public $fillable = [
         'name',
+        'name_type',
         'amount',
         'phone',
         'received_amount',

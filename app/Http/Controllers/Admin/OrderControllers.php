@@ -150,9 +150,12 @@ class OrderControllers extends Controller
 //        }
 
 
-//        if ($this->request->input('edit_name')) {
-//            $order = $order->where('edit_name', 'like', "%" . $this->request->input('edit_name') . "%");
-//        }
+        if ($this->request->input('edit_name')) {
+            $order = $order->where('edit_name', 'like', "%" . $this->request->input('edit_name') . "%");
+        }
+        if ($this->request->input('name_type')) {
+            $order = $order->where('name_type', 'like', "%" . $this->request->input('name_type') . "%");
+        }
 //        if ($this->request->input('submission_end_time')) {
 //            $order = $order->whereDate('submission_time', '<=', $this->request->input('submission_end_time'))->whereDate('submission_time', '>=', $this->request->input('submission_time'));
 //        }
@@ -319,12 +322,15 @@ class OrderControllers extends Controller
         $year = date('Y');
         $start_time = $year . '-01-01 00:00:00';
         $end_time = $year . '-12-31 23:59:59';
-        $data['amount_count'] = $order->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)->sum('amount');
-        $data['received_amount_count'] = $order->sum('received_amount');
-        $data['month_amount_count'] = $order->whereDate('created_at', '<=', date('Y-m-t'))->whereDate('created_at', '>=', date('Y-m-01'))->sum('amount');
+        $data['amount_count'] = $order->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)->sum('twice_received_amount');
+        $data['received_amount_count'] =$order->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)->sum('received_amount');;
+        $data['end_received_amount_count'] =$order->whereDate('created_at', '>=', $start_time)->whereDate('created_at', '<=', $end_time)->sum('end_received_amount');;
+
+        $data['month_amount_count'] = $order->whereDate('created_at', '<=', date('Y-m-t'))->whereDate('created_at', '>=', date('Y-m-01'))->sum('twice_received_amount');
         // $data['month_amount_count'] = $order->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->sum('amount');
         // $data['month_received_amount_count'] = $order->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->sum('received_amount');
         $data['month_received_amount_count'] = $order->whereDate('created_at', '<=', date('Y-m-t'))->whereDate('created_at', '>=', date('Y-m-01'))->sum('received_amount');
+        $data['month_end_received_amount_count'] = $order->whereDate('created_at', '<=', date('Y-m-t'))->whereDate('created_at', '>=', date('Y-m-01'))->sum('end_received_amount');
         return $data;
     }
 
@@ -504,7 +510,7 @@ class OrderControllers extends Controller
             'remark' => $data['remark'] ?? '',
             'twice_received_amount' => $data['twice_received_amount'] ?? 0,
             'end_received_amount' => $data['end_received_amount'] ?? 0,
-//            'end_time' => $data['end_time'] ?? '',
+            'name_type' => $data['name_type'] ?? '',
 //            'twice_time' => $data['twice_time'] ?? '',
 //            'receipt_account_type' => $data['receipt_account_type'] ?? 1,
             "twice_img" => $data['twice_img'] ?? '',
