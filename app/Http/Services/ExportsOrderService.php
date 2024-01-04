@@ -24,8 +24,7 @@ class ExportsOrderService implements FromCollection, WithHeadings, WithStyles
 
     public function headings(): array
     {
-        return ["id", "任务类型", "题目", "字数", "截止时间", "订单总额", "已收金额", "首款", "首款付款时间", "二次收款时间", "二次收款金额", "尾款金额", "尾款收款时间", "财务审核", "付款截图", "支付方式", "详细要求", "客服名称", "编辑名称",
-            "备注", "稿件下载", "状态", "创建时间"];
+        return ["id", "客户类型", "客户名称", "标的金额", "合同比例", "订金金额", "订金截图", "尾款金额", "尾款截图", "回款金额", "增收截图", "财务审核", "客服备注", "所属客服", "法务", "售后金额", "状态", "客户等级", "售后人员", "创建时间"];
     }
 
 
@@ -63,28 +62,25 @@ class ExportsOrderService implements FromCollection, WithHeadings, WithStyles
         foreach ($result as $key => $v) {
             array_push($this->data, [
                 $v['id'],
-                BaseConstants::TASKTYPE[$v['task_type']],
-                $v['subject'],
-                $v['word_number'],
-                $v['submission_time'],
+                BaseConstants::TASKTYPE[$v['name_type']],
+                $v['name'],
                 $v['amount'],
-                $v['received_amount'] + $v['twice_received_amount'] + $v['end_received_amount'],
+                $v['phone'],
                 $v['received_amount'],
-                $v['receipt_time'],
-                $v['twice_received_amount'],
-                $v['twice_time'],
-                $v['end_received_amount'],
-                $v['end_time'],
-                BaseConstants::FINANCE_STATUS[$v['finance_check']] ?? "",
                 $v['pay_img'],
-                BaseConstants::ORDERPAYTYPE[$v['pay_type']] ?? "",
-                $v['detail_re'],
+                $v['end_received_amount'],
+                $v['receipt_account'],
+                $v['twice_received_amount'],
+                $v['twice_img'],
+                BaseConstants::FINANCE_STATUS[$v['finance_check']] ?? "",
+                $v['remark'],
                 $v['staff_name'],
                 $v['edit_name'],
-                $v['remark'],
-                $v['manuscript'],
+                $v['after_banlace'],
                 BaseConstants::ORDERSTARTLIST[$v['status']],
-                $v['created_at']
+                $v['wr_where'],
+                $v['after_name'],
+                $v['created_at'],
             ]);
         }
 
