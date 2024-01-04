@@ -62,7 +62,7 @@ class ExportsOrderService implements FromCollection, WithHeadings, WithStyles
         foreach ($result as $key => $v) {
             array_push($this->data, [
                 $v['id'],
-                BaseConstants::TASKTYPE[$v['name_type']],
+                BaseConstants::TASKTYPE[$v['name_type']]  ?? "",
                 $v['name'],
                 $v['amount'],
                 $v['phone'],
@@ -77,7 +77,7 @@ class ExportsOrderService implements FromCollection, WithHeadings, WithStyles
                 $v['staff_name'],
                 $v['edit_name'],
                 $v['after_banlace'],
-                BaseConstants::ORDERSTARTLIST[$v['status']],
+                BaseConstants::ORDERSTARTLIST[$v['status']]  ?? "",
                 $v['wr_where'],
                 $v['after_name'],
                 $v['created_at'],
